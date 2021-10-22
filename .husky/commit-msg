@@ -1,4 +1,4 @@
 #!/bin/bash
 . "$(dirname "$0")/_/husky.sh"
 
-npm run lint
+npx --no-install commitlint --edit
