@@ -29,7 +29,7 @@ class HYRquest {
     // 添加默认拦截器（所有实例都有的拦截器）
     this.instance.interceptors.request.use(
       (config) => {
-        console.log('所有实例都有的拦截器：请求成功拦截')
+        // console.log('所有实例都有的拦截器：请求成功拦截')
         if (this.showLoading) {
           this.loading = ElLoading.service({
             lock: true,
@@ -40,14 +40,13 @@ class HYRquest {
         return config
       },
       (error) => {
-        console.log('所有实例都有的拦截器：请求失败拦截')
+        // console.log('所有实例都有的拦截器：请求失败拦截')
         return Promise.reject(error)
       }
     )
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('所有实例都有的拦截器：数据响应成功拦截')
-
+        // console.log('所有实例都有的拦截器：数据响应成功拦截')
         const data: any = res.data
 
         // 将loading移除
@@ -58,7 +57,7 @@ class HYRquest {
         return res.data
       },
       (error) => {
-        console.log('所有实例都有的拦截器：数据响应失败拦截')
+        // console.log('所有实例都有的拦截器：数据响应失败拦截')
         // 例子：判断不同的HttpErrorCode显示不同的错误信息
         if (error.response.status === 404) {
           console.log('404的错误')
@@ -90,7 +89,6 @@ class HYRquest {
 
           // 2.将showLoading设置为默认值，这样不会影响下一个请求
           this.showLoading = DEFAULT_LOADING
-          console.log(res)
 
           // 3.将resolve返回出去
           resolve(res)
