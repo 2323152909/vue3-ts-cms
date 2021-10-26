@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="phone" label-width="65px" :rules="rules">
+  <el-form ref="formRef" :model="phone" label-width="65px" :rules="rules">
     <el-form-item label="手机号" prop="number">
       <el-input v-model="phone.number"></el-input>
     </el-form-item>
@@ -13,15 +13,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { rules } from '../config/phone-config'
+import { ElForm } from 'element-plus'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup() {
     const phone = reactive({ number: '', code: '' })
+    const formRef = ref<InstanceType<typeof ElForm>>()
+    const store = useStore()
+
+    const loginAction = () => {
+      formRef.value?.validate((valid) => {
+        if (valid) {
+          // 2.开始进行登录验证
+          store.dispatch('login/phoneLoginAction', { ...phone })
+        } else {
+          return false
+        }
+      })
+    }
     return {
       phone,
-      rules
+      rules,
+      formRef,
+      loginAction
     }
   }
 })

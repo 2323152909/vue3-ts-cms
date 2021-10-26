@@ -11,8 +11,8 @@ export const rules = {
   code: [
     { required: true, message: '验证码必填', trigger: 'blur' },
     {
-      pattern: /^1[0-9]{10}$/,
-      message: '手机号长度必须是11位',
+      pattern: /^[0-9]{6}$/,
+      message: '验证码为6位的数字',
       trigger: 'blur'
     }
   ]

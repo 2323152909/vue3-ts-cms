@@ -5,7 +5,7 @@ import { ElLoading, ILoadingInstance } from 'element-plus'
 
 const DEFAULT_LOADING = true
 
-class HYRquest {
+class HYRequest {
   instance: AxiosInstance
   interceptors?: HYRequestInterceptors
   loading?: ILoadingInstance
@@ -97,7 +97,6 @@ class HYRquest {
           // 将showLoading设置为默认值，这样不会影响下一个请求
           this.showLoading = DEFAULT_LOADING
           reject(err)
-          return err
         })
     })
   }
@@ -116,4 +115,4 @@ class HYRquest {
   }
 }
 
-export default HYRquest
+export default HYRequest
