@@ -10,6 +10,7 @@ import './assets/css/index.less'
 // import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+// 先调用本地存储信息初始化到vuex中
 setupStore()
 
 const app = createApp(App)
