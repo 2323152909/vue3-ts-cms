@@ -7,25 +7,23 @@
     <el-menu
       text-color="#b7bdc3"
       background-color="#001529"
+      :default-active="defaultValue"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
       :unique-opened="false"
     >
-      <template v-for="(item, index) in userMenus" :key="item.id">
+      <template v-for="item in userMenus" :key="item.id">
         <!-- 二级菜单 -->
         <template v-if="item.type === 1">
           <!-- 二级菜单可以展开的标题 -->
-          <el-sub-menu :index="`${index + 1 + ''}`">
+          <el-sub-menu :index="item.id + ''">
             <template #title>
               <i v-if="item.icon" :class="item.icon"></i>
               <span>{{ item.name }}</span>
             </template>
             <!-- 遍历里面的item项 -->
-            <template v-for="(subitem, index1) in item.children" :key="subitem.id">
-              <el-menu-item
-                :index="`${index + 1 + '-' + (index1 + 1)}`"
-                @click="handleMenuItemClick(subitem)"
-              >
+            <template v-for="subitem in item.children" :key="subitem.id">
+              <el-menu-item :index="subitem.id + ''" @click="handleMenuItemClick(subitem)">
                 <template #title>
                   <i v-if="subitem.icon" :class="subitem.icon"></i>
                   <span>{{ subitem.name }}</span>
@@ -35,7 +33,7 @@
           </el-sub-menu>
         </template>
         <template v-else-if="item.type === 2">
-          <el-menu-item :index="`${index + 1 + ''}`">
+          <el-menu-item :index="item.id + ''">
             <template #title>
               <i v-if="item.icon" :class="item.icon"></i>
               <span>{{ item.name }}</span>
@@ -48,9 +46,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { pathMapToMenu } from '@/utils/map-menus'
 
 export default defineComponent({
   props: {
@@ -59,17 +58,29 @@ export default defineComponent({
     }
   },
   setup() {
+    // store
     const store = useStore()
-    const router = useRouter()
     const userMenus = computed(() => store.state.login.userMenus)
 
+    // router
+    const router = useRouter()
+    const route = useRoute()
+    const currentPath = route.path
+
+    const menu = pathMapToMenu(userMenus.value, currentPath)
+    // const breadcrumbs = pathMapBreadcrumbs(userMenus.value, currentPath)
+
+    const defaultValue = ref(menu.id + '')
+
+    // event handle
     const handleMenuItemClick = (item: any) => {
       // 进行对应路由跳转
-      router.replace(item.url)
+      router.push(item.url ?? '/not-found')
     }
 
     return {
       userMenus,
+      defaultValue,
       handleMenuItemClick
     }
   }

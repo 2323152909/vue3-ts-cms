@@ -7,6 +7,7 @@ interface ISelectOption {
 
 export interface IFormItem {
   type: IFormType
+  field: string
   label: string
   rules?: any[]
   placeholder?: any

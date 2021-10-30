@@ -47,15 +47,12 @@ export default defineComponent({
 }
 .el-header {
   color: var(--el-text-color-primary);
-  // text-align: center;
-  line-height: 60px;
 }
 
 .el-aside {
   background-color: #00142d;
   color: var(--el-text-color-primary);
   text-align: center;
-  line-height: 200px;
   overflow: hidden;
 }
 
@@ -63,7 +60,6 @@ export default defineComponent({
   background-color: #e9eef3;
   color: var(--el-text-color-primary);
   text-align: center;
-  line-height: 160px;
   height: 100%;
   .page-info {
     background-color: #fff;
