@@ -12,8 +12,7 @@ export const searchFormConfig: IForm = {
       field: 'name',
       label: '用户名',
       placeholder: '请输入用户名',
-      type: 'input',
-      rules: [{ required: true, message: '请输入用户名', trigger: 'blur' }]
+      type: 'input'
     },
     {
       field: 'password',

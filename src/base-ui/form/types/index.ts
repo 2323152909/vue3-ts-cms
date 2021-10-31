@@ -21,5 +21,5 @@ export interface IForm {
   formItems: IFormItem[]
   labelWidth?: string
   itemStyle?: any
-  colLayout: any
+  colLayout?: any
 }
