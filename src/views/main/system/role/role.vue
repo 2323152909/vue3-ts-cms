@@ -1,7 +1,11 @@
 <template>
   <div class="role">
-    <PageSearch :searchFormConfig="searchFormConfig" />
-    <PageContent :contentTableConfig="contentTableConfig" pageName="role" />
+    <PageSearch
+      :searchFormConfig="searchFormConfig"
+      @handleSearchClick="handleSearchClick"
+      @handleResetClick="handleResetClick"
+    />
+    <PageContent :contentTableConfig="contentTableConfig" pageName="role" ref="pageContentRef" />
   </div>
 </template>
 
@@ -11,6 +15,7 @@ import PageSearch from '@/components/page-search'
 import PageContent from '@/components/page-content'
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
+import { usePageSearch } from '@/hooks/usePageSearch'
 
 export default defineComponent({
   name: 'role',
@@ -19,9 +24,14 @@ export default defineComponent({
     PageContent
   },
   setup() {
+    const [pageContentRef, handleSearchClick, handleResetClick] = usePageSearch()
+
     return {
       searchFormConfig,
-      contentTableConfig
+      contentTableConfig,
+      pageContentRef,
+      handleSearchClick,
+      handleResetClick
     }
   }
 })

@@ -7,7 +7,9 @@
       <template #footer>
         <div class="handle-btns">
           <el-button icon="el-icon-refresh" @click="handleResetClick">重置</el-button>
-          <el-button type="primary" icon="el-icon-search">搜索</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="handleSearchClick"
+            >搜索</el-button
+          >
         </div>
       </template>
     </HdFrom>
@@ -26,7 +28,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ['handleSearchClick', 'handleResetClick'],
+  setup(props, { emit }) {
     // 双向绑定的属性应该是由配置文件的field来决定的
     // 1.优化一：formData中的属性应该是动态的
     const formItem = props.searchFormConfig.formItems ?? []
@@ -35,15 +38,31 @@ export default defineComponent({
       formOriginData[item.field] = ''
     }
 
+    // 表单数据对象
     const formData = ref(formOriginData)
+
     // 优化二：当用户点击重置
     const handleResetClick = () => {
       formData.value = formOriginData
+      // 重置后发送网络请求
+      emit('handleResetClick')
+      // for (const key of formOriginData) {
+      //   formData.value[key] = formOriginData[key]
+      // }
+    }
+
+    // 优化三：当用户点击搜索
+    const handleSearchClick = () => {
+      // 根据输入的数据，发送网络请求获取数据
+      emit('handleSearchClick', formData.value)
     }
 
     return {
       formData,
-      handleResetClick
+      // pageList,
+      // pageCount,
+      handleResetClick,
+      handleSearchClick
     }
   }
 })

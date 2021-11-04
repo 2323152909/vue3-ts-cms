@@ -1,6 +1,6 @@
 import { Module } from 'vuex'
 import localCache from '@/utils/cache'
-import { mapMenuToRouotes } from '@/utils/map-menus'
+import { mapMenusToPermissions, mapMenuToRouotes } from '@/utils/map-menus'
 import router from '@/router'
 import {
   accountLoginRequest,
@@ -17,7 +17,8 @@ const loginModule: Module<ILoginState, IRootState> = {
     return {
       token: '',
       userInfo: {},
-      userMenus: []
+      userMenus: [],
+      permissions: []
     }
   },
   mutations: {
@@ -30,6 +31,7 @@ const loginModule: Module<ILoginState, IRootState> = {
     changeUserMenu(state, userMenus) {
       state.userMenus = userMenus
 
+      // 动态获取路由信息，并动态生成路由
       // userMenus => routes
       const routes = mapMenuToRouotes(userMenus)
 
@@ -37,11 +39,16 @@ const loginModule: Module<ILoginState, IRootState> = {
       routes.forEach((route) => {
         router.addRoute('main', route)
       })
+
+      // 获取用户按钮权限
+      const permissions = mapMenusToPermissions(userMenus)
+      // 保存权限信息到state中
+      state.permissions = permissions
     }
   },
   getters: {},
   actions: {
-    async accountLoginAction({ commit }, payload: IAccount) {
+    async accountLoginAction({ commit, dispatch }, payload: IAccount) {
       // 1.实现登录逻辑
       const { data: res } = await accountLoginRequest(payload)
       localCache.setCache('token', res.token)

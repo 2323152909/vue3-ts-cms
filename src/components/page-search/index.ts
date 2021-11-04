@@ -1,3 +1,3 @@
-import HPageSearch from './src/page-search.vue'
+import PageSearch from './src/page-search.vue'
 
-export default HPageSearch
+export default PageSearch

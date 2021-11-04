@@ -6,8 +6,7 @@ export const searchFormConfig: IForm = {
       field: 'name',
       label: '角色名称',
       placeholder: '请输入角色名称',
-      type: 'input',
-      rules: [{ required: true, message: '请输入用户名', trigger: 'blur' }]
+      type: 'input'
     },
     {
       field: 'intro',
@@ -16,7 +15,7 @@ export const searchFormConfig: IForm = {
       type: 'input'
     },
     {
-      field: 'createTime',
+      field: 'createAt',
       label: '创建时间',
       type: 'datepicker',
       otherOptions: {

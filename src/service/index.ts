@@ -19,7 +19,7 @@ const hyRequest = new HYRequest({
     },
     requestInterceptorCatch: (error) => {
       // console.log('请求失败的拦截')
-      return error
+      return Promise.reject(error)
     },
     responseInterceptor: (res) => {
       // console.log('数据响应成功的拦截')
@@ -27,7 +27,7 @@ const hyRequest = new HYRequest({
     },
     responseInterceptorCatch: (error) => {
       // console.log('数据响应失败的拦截')
-      return error
+      return Promise.reject(error)
     }
   }
 })

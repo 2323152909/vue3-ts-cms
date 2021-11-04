@@ -1,7 +1,8 @@
 import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 import { HYRequestInterceptors, HYRequestConfig } from './type'
-import { ElLoading, ILoadingInstance } from 'element-plus'
+import { ElLoading, ILoadingInstance, ElNotification } from 'element-plus'
+import { Vue } from 'vue-demi'
 
 const DEFAULT_LOADING = true
 
@@ -48,20 +49,34 @@ class HYRequest {
       (res) => {
         // console.log('所有实例都有的拦截器：数据响应成功拦截')
         const data: any = res.data
-
+        if (data.code !== 0) {
+          ElNotification({
+            type: 'error',
+            message: data.data
+          })
+        }
         // 将loading移除
         this.loading?.close()
-        if (data.returnCode === '-1001') {
-          console.log('请求失败')
-        }
-        return res.data
+        return data
       },
       (error) => {
         // console.log('所有实例都有的拦截器：数据响应失败拦截')
         // 例子：判断不同的HttpErrorCode显示不同的错误信息
         if (error.response.status === 404) {
-          console.log('404的错误')
+          ElNotification({
+            type: 'error',
+            message: 'Not Found~'
+          })
         }
+        if (error.response.status === 401) {
+          ElNotification({
+            type: 'error',
+            message: '数据请求异常'
+          })
+        }
+        // 将loading移除
+        this.loading?.close()
+
         return Promise.reject(error)
       }
     )
