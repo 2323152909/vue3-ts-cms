@@ -54,6 +54,9 @@ const loginModule: Module<ILoginState, IRootState> = {
       localCache.setCache('token', res.token)
       commit('changeToken', res.token)
 
+      // 发送初始化的请求(完整的role/department)
+      dispatch('getInitialDataAction', null, { root: true })
+
       // 2.请求用户信息
       const { data: userInfo } = await userInfoByIdRequest(res.id)
       localCache.setCache('userInfo', userInfo)
@@ -68,14 +71,24 @@ const loginModule: Module<ILoginState, IRootState> = {
       // 4.跳转到首页
       router.push('/main')
     },
-    loadLocalLogin({ commit }) {
+    loadLocalLogin({ commit, dispatch }) {
       // 获取本地存储的信息，存入vuex中
       const token = localCache.getCache('token')
-      commit('changeToken', token)
+      if (token) {
+        commit('changeToken', token)
+        // 发送初始化的请求(完整的role/department)
+        dispatch('getInitialDataAction', null, { root: true })
+      }
+
       const userInfo = localCache.getCache('userInfo')
-      commit('changeUserInfo', userInfo)
-      const userMenus = localCache.getCache('userMenu')
-      commit('changeUserMenu', userMenus)
+      if (userInfo) {
+        commit('changeUserInfo', userInfo)
+      }
+
+      const userMenu = localCache.getCache('userMenu')
+      if (userMenu) {
+        commit('changeUserMenu', userMenu)
+      }
     }
   }
 }

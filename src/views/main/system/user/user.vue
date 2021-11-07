@@ -20,7 +20,7 @@
     <PageModal
       :defaultInfo="defaultInfo"
       ref="pageModalRef"
-      :modelConfig="modalConfigRef"
+      :modalConfig="modalConfigRef"
       pageName="users"
     ></PageModal>
   </div>

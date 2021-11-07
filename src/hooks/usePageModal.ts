@@ -1,7 +1,7 @@
 import PageModal from '@/components/page-modal'
 import { ref } from 'vue'
 
-type CallbackType = () => void
+type CallbackType = (item?: any) => void
 
 export function usePageModal(newCb?: CallbackType, editCb?: CallbackType) {
   const pageModalRef = ref<InstanceType<typeof PageModal>>()
@@ -14,7 +14,7 @@ export function usePageModal(newCb?: CallbackType, editCb?: CallbackType) {
       pageModalRef.value.dialogTitle = item.title
     }
     // 判断是新建还是编辑
-    Object.keys(item).length === 1 ? newCb && newCb() : editCb && editCb()
+    Object.keys(item).length === 1 ? newCb && newCb() : editCb && editCb(item)
   }
 
   return [pageModalRef, defaultInfo, showDialog]

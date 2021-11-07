@@ -119,13 +119,12 @@ export default defineComponent({
 
     // 添加按钮
     const handleAddClick = () => {
-      emit('showDialog', { title: '添加用户' })
+      emit('showDialog', { title: '添加数据' })
     }
 
     // 编辑按钮
     const handleEditClick = (item: any) => {
-      console.log(item)
-      emit('showDialog', { ...item, title: '编辑用户' })
+      emit('showDialog', { ...item, title: '编辑数据' })
     }
 
     // 删除按钮

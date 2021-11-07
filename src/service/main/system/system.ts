@@ -1,28 +1,28 @@
 import { IDataType } from '@/service/types'
-import HdRequest from '../../index'
+import hdRequest from '../../index'
 
 export function getPageListData(url: string, queryInfo: any) {
-  return HdRequest.post<IDataType>({
+  return hdRequest.post<IDataType>({
     url,
     data: queryInfo
   })
 }
 
 export function deletePageDataById(url: string) {
-  return HdRequest.delete<IDataType>({
+  return hdRequest.delete<IDataType>({
     url
   })
 }
 
 export function editPageDataById(url: string, queryInfo: any) {
-  return HdRequest.patch<IDataType>({
+  return hdRequest.patch<IDataType>({
     url,
     data: queryInfo
   })
 }
 
 export function createPageData(url: string, queryInfo: any) {
-  return HdRequest.post<IDataType>({
+  return hdRequest.post<IDataType>({
     url,
     data: queryInfo
   })
