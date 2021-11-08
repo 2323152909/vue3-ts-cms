@@ -7,6 +7,8 @@ export function usePageSearch() {
 
   // 查询操作
   const handleSearchClick = (queryInfo: any) => {
+    console.log('点击了搜索按钮')
+
     pageContentRef.value?.getPageData(queryInfo)
   }
 

@@ -15,7 +15,8 @@ const store = createStore<IRootState>({
       height: '231',
       entireDepartment: [],
       entireRole: [],
-      entireMenu: []
+      entireMenu: [],
+      entireCategory: []
     }
   },
   mutations: {
@@ -27,6 +28,9 @@ const store = createStore<IRootState>({
     },
     changeEntireMenu(state, menus) {
       state.entireMenu = menus
+    },
+    changeEntireCategory(state, categorys) {
+      state.entireCategory = categorys
     }
   },
   actions: {
@@ -56,7 +60,16 @@ const store = createStore<IRootState>({
         offset: 0,
         size: 1000
       })
+
       commit('changeEntireMenu', menuList)
+      // 3.请求全部菜单数据
+      const {
+        data: { list: categoryList }
+      } = await getPageListData('/category/list', {
+        offset: 0,
+        size: 1000
+      })
+      commit('changeEntireCategory', categoryList)
     }
   },
   getters: {},

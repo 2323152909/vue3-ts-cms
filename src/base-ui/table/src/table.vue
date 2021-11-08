@@ -16,7 +16,7 @@
       @selection-change="handleSelectionChange"
       v-bind="childrenProps"
     >
-      <el-table-column v-if="showSelectColumn" type="selection" align="center" width="60">
+      <el-table-column v-if="showSelectColumn" type="selection" align="center" width="40">
       </el-table-column>
       <el-table-column type="index" v-if="showIndexColumn" label="#" align="center" width="80">
       </el-table-column>

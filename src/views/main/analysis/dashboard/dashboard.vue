@@ -1,6 +1,13 @@
 <template>
   <div class="dashboard">
     <el-row :gutter="10" class="content-row">
+      <el-col v-for="item in goodsAmountList" :key="item.amount" :span="6">
+        <HdCard :title="item.title">
+          <span>{{ item.tips + ': ' + item.number1 }}</span>
+        </HdCard>
+      </el-col>
+    </el-row>
+    <el-row :gutter="10" class="content-row">
       <el-col :span="7">
         <HdCard title="分类商品数量(饼图)">
           <PieEchart :pieData="categoryGoodsCount"></PieEchart>
@@ -54,6 +61,8 @@ export default defineComponent({
     store.dispatch('dashboard/getDashboardDataActions')
 
     // 获取数据
+    const goodsAmountList = computed(() => store.state.dashboard.goodsAmountList)
+
     const categoryGoodsCount = computed(() =>
       store.state.dashboard.categoryGoodsCount.map((item) => ({
         name: item.name,
@@ -80,6 +89,7 @@ export default defineComponent({
     )
 
     return {
+      goodsAmountList,
       categoryGoodsCount,
       categoryGoodsSale,
       categoryGoodsFavor,

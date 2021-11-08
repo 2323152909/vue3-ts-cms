@@ -5,7 +5,8 @@ enum DashboardAPI {
   categoryGoodsCount = '/goods/category/count',
   categoryGoodsSale = '/goods/category/sale',
   categoryGoodsFavor = '/goods/category/favor',
-  addressGoodsSale = '/goods/address/sale'
+  addressGoodsSale = '/goods/address/sale',
+  goodsAmountList = '/goods/amount/list'
 }
 
 export function getCategoryGoodsCount() {
@@ -26,5 +27,10 @@ export function getCategoryGoodsFavor() {
 export function getAddressGoodsSale() {
   return hdRequest.get<IDataType>({
     url: DashboardAPI.addressGoodsSale
+  })
+}
+export function getGoodsAmountList() {
+  return hdRequest.get<IDataType>({
+    url: DashboardAPI.goodsAmountList
   })
 }

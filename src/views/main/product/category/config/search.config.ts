@@ -10,27 +10,31 @@ export const searchFormConfig: IForm = {
     },
     {
       field: 'name',
-      label: '名称',
-      placeholder: '请输入商品名称',
+      label: '用户名',
+      placeholder: '请输入用户名',
       type: 'input'
     },
     {
-      field: 'newPrice',
-      label: '新价格',
-      placeholder: '请输入新价格',
+      field: 'realname',
+      label: '真实姓名',
+      placeholder: '请输入真实姓名',
       type: 'input'
     },
     {
-      field: 'categoryId',
-      label: '类别ID',
-      placeholder: '请输入商品类别ID',
+      field: 'cellphone',
+      label: '手机号码',
+      placeholder: '请输入电话号码',
       type: 'input'
     },
     {
-      field: 'address',
-      label: '地址',
-      placeholder: '请输入要查询的商品所在的城市',
-      type: 'input'
+      field: 'enable',
+      label: '用户状态',
+      placeholder: '请选择用户状态',
+      type: 'select',
+      options: [
+        { label: '启用', value: '1' },
+        { label: '禁用', value: '0' }
+      ]
     },
     {
       field: 'createAt',
@@ -44,6 +48,6 @@ export const searchFormConfig: IForm = {
     }
   ],
   labelWidth: '120px',
-  itemStyle: { padding: '20px 30px' },
-  colLayout: { span: 8 }
+  itemStyle: { padding: '20px 30px' }
+  // colLayout: { span: 8 }
 }
