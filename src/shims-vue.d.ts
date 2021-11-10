@@ -9,3 +9,4 @@ declare let $store: any
 declare let VUE_APP_BASE_URL: string
 declare let VUE_APP_BASE_NAME: string
 declare module '*.json'
+declare module 'lodash'

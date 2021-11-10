@@ -11,4 +11,6 @@ export interface ISystemState {
   departmentCount: number
   categoryList: any[]
   categoryCount: number
+  storyList: any[]
+  storyCount: number
 }

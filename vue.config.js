@@ -23,6 +23,7 @@ module.exports = {
   publicPath: './',
   // 2.配置方式二：和webpack属性完全一直，最后会进行合并
   configureWebpack: {
+    devtool: false,
     resolve: {
       alias: {
         components: '@/components'
