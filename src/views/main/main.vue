@@ -1,19 +1,21 @@
 <template>
-  <div class="main">
-    <el-container>
-      <el-aside :width="isCollapse ? '60px' : '210px'">
-        <nav-menu :isCollapse="isCollapse" />
-      </el-aside>
-      <el-container>
-        <el-header><nav-header @foldChange="handleFoldChange" /></el-header>
-        <el-main>
-          <div class="page-info">
-            <router-view></router-view>
-          </div>
-        </el-main>
-      </el-container>
-    </el-container>
-  </div>
+    <div class="main">
+        <el-container>
+            <el-aside :width="isCollapse ? '60px' : '210px'">
+                <nav-menu :isCollapse="isCollapse" />
+            </el-aside>
+            <el-container>
+                <el-header>
+                    <nav-header @foldChange="handleFoldChange" />
+                </el-header>
+                <el-main>
+                    <div class="page-info">
+                        <router-view></router-view>
+                    </div>
+                </el-main>
+            </el-container>
+        </el-container>
+    </div>
 </template>
 
 <script lang="ts">
@@ -67,6 +69,7 @@ export default defineComponent({
 }
 .el-container {
   height: 100%;
+  min-width: 1200px;
   margin-bottom: 40px;
 }
 </style>

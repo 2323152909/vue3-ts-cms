@@ -2,7 +2,6 @@ import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 import { HYRequestInterceptors, HYRequestConfig } from './type'
 import { ElLoading, ILoadingInstance, ElNotification } from 'element-plus'
-import { Vue } from 'vue-demi'
 
 const DEFAULT_LOADING = true
 
@@ -54,6 +53,7 @@ class HYRequest {
             type: 'error',
             message: data.data
           })
+          return new Error(data)
         }
         // 将loading移除
         this.loading?.close()
